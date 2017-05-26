@@ -54,17 +54,46 @@ public class RandPanel extends JPanel {
 		this.max=max;
 	}
 	
+	public int getRand(String max) {
+		Random r=new Random();
+		try {
+			return r.nextInt(Integer.parseInt(max));
+		} catch(IllegalArgumentException e) {
+			return 0;
+		}
+	}
+	
+	public String getAlloc(String max[]) {
+		String str="";
+		
+		for (int i=0; i<max.length; i++) {
+			if (i!=0 && i%5==0) {
+				str+="<br>";
+			}
+			str+=Integer.toString(getRand(max[i]))+",";
+		}
+		if (str.endsWith(",")) {
+			str=str.substring(0,str.length()-1);
+		}
+		return str;
+	}
+	
 	public void init(ListPanel lp) {
 		Random r=new Random();
 		int procCount=r.nextInt(15)+1;
 		
 		for (int i=0; i<procCount; i++) {
-			int arrivalTime=0;
-			String m=header+(r.nextInt(20)+1)+","+getVector(20,resourceNum-1)+end;
-			String alloc=header+"0,"+getVector(20,resourceNum-1)+end;
+			int arrivalTime=r.nextInt(21)/3;
+			
+			String ceiling=getVector(20,resourceNum-1);
+			String m=header+(r.nextInt(20)+1)+","+ceiling+end;
+			
+			String alloc=header+"0,"+getAlloc(ceiling.split(","));
 			
 			String tmp=m.replace(header, "");
 			tmp=tmp.substring(0, tmp.indexOf(","));
+			
+			time=Integer.parseInt(tmp);
 			String c=header+getVector(max,Integer.parseInt(tmp))+end;
 			
 			if (resourceNum==1) {

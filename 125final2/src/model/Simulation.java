@@ -12,7 +12,6 @@ import bankersalgo.SafeState;
 public class Simulation extends Thread {
 	private ArrayList<Process> process;
 	private ArrayList<Integer> available;
-	private final Object GUI_MONITOR=new Object();
 	
 	private int resourceNum;
 	private int simCount;
@@ -55,20 +54,27 @@ public class Simulation extends Thread {
 			deadlock.pushSafeState(available);
 			available=deadlock.getAvailable();
 		}
+		
+		for (int k=0; k<simCount; k++) {
+			banker[k].setAvailable(available);
+			for (int i=1; i<resourceNum; i++) {
+				chart[k].showAvailable(i, Integer.toString(available.get(i)));
+			}
+		}
+		
 		maxIteration = deadlock.getMaxIteration();
 		start();
 	}
 
 	
 	public void pause() {
-//		if (pauseThreadFlag) {
-//			delay=0;
-//			interrupt();
-//			pauseThreadFlag=false;
-//		}
-//		else {
-//			pauseThreadFlag=true;
-//		}
+		if (!pauseThreadFlag) {
+			this.interrupt();
+			pauseThreadFlag=true;
+		}
+		else {
+			pauseThreadFlag=false;
+		}
 	}
 	
 	public void end() {
@@ -82,7 +88,7 @@ public class Simulation extends Thread {
 		int done=0;
 
 		while (running) {
-			if (!isInterrupted()) {
+			if (!this.isInterrupted() && !pauseThreadFlag) {
 				for (int i=0; i<simCount; i++) {
 					tempProc = banker[i].getProcess(t, maxIteration);
 					
@@ -117,9 +123,9 @@ public class Simulation extends Thread {
 			
 			try {
 				Thread.sleep(delay);
-//				while (!pauseThreadFlag) {
-//					interrupt();
-//				}
+				while (!pauseThreadFlag) {
+					interrupt();
+				}
 			} catch(Exception e) {}
 		}
 	}
