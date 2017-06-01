@@ -71,7 +71,6 @@ public class Simulation extends Thread {
 	
 	public void pause() {
 		if (!pauseThreadFlag) {
-			this.interrupt();
 			pauseThreadFlag=true;
 		}
 		else {
