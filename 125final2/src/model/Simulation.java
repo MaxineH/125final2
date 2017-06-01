@@ -69,9 +69,9 @@ public class Simulation extends Thread {
 
 	
 	public void pause() {
-		simPanel.changeName();
 		if (!pauseThreadFlag) {
 			pauseThreadFlag=true;
+			simPanel.changeName();
 		}
 		else {
 			pauseThreadFlag=false;
@@ -80,6 +80,13 @@ public class Simulation extends Thread {
 	
 	public void end() {
 		running=false;
+		
+		for (int i=0; i<simCount; i++){
+			chart[i].showStat(Utils.mergeList(cpu[i].getProcessSummary(i),
+					disk[i].getProcessSummary()),"<html>"+cpu[i].getSummary()+
+					disk[i].getTotal()+"</html>");
+			chart[i].repaint();
+		}
 		interrupt();
 	}
 
@@ -108,16 +115,12 @@ public class Simulation extends Thread {
 					if  (cpu[i].isDone()) {
 						cpu[i].set();
 						disk[i].fin();
+						chart[i].addBox(t, Color.WHITE);
 						done++;
 					}
 					
 					if (done==simCount) {
-						running=false;
-						chart[i].addBox(t, Color.WHITE);
-						chart[i].showStat(Utils.mergeList(cpu[i].getProcessSummary(i),
-								disk[i].getProcessSummary()),"<html>"+cpu[i].getSummary()+
-								disk[i].getTotal()+"</html>");
-						chart[i].repaint();
+						end();
 						break;
 					}
 					banker[i].resetAllocated();
