@@ -40,6 +40,7 @@ public class Simulation extends Thread {
 		resourceNum=input.getResourceNum();
 		available=input.getAvailable();
 		process=input.getProcess();
+		
 		for (int i=0; i<simCount; i++) {
 			chart[i]=new Chart(i+1,input.getHeadCylinder(),input.getMaxCylinder(),input.getTime());
 			banker[i]=input.getBankers(i,chart[i]);
@@ -60,9 +61,6 @@ public class Simulation extends Thread {
 		
 		for (int k=0; k<simCount; k++) {
 			banker[k].setAvailable(available);
-			for (int i=1; i<resourceNum; i++) {
-				chart[k].showAvailable(i, Integer.toString(available.get(i)));
-			}
 		}
 		
 		maxIteration = deadlock.getMaxIteration();
@@ -71,6 +69,7 @@ public class Simulation extends Thread {
 
 	
 	public void pause() {
+		simPanel.changeName();
 		if (!pauseThreadFlag) {
 			pauseThreadFlag=true;
 		}
@@ -124,6 +123,8 @@ public class Simulation extends Thread {
 					banker[i].resetAllocated();
 				}
 				t++;
+			
+				if (pause) pause();
 			}
 			
 			try {

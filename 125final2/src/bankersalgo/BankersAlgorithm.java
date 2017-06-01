@@ -1,16 +1,18 @@
 package bankersalgo;
 
-import gui.Chart;
-
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
+import java.util.Queue;
 
+import gui.Chart;
 import model.Process;
 
 public class BankersAlgorithm {
 	private ArrayList<Process> jobQ;
 	private ArrayList<Integer> available;
-	private ArrayList<Process> availableProc;
+//	Queue<Process> q;
+	ArrayList<Process> availableProc;
 	
 	private Chart chart;
 	 
@@ -18,7 +20,7 @@ public class BankersAlgorithm {
 	private int resSize;
 	private int choice;
 	
-	private static int curr=0;
+	private int curr=0;
 	
 	public BankersAlgorithm(int choice, Chart chart, ArrayList<Process> jobQ, ArrayList<Integer> available, int resSize,
 			String algoType ){
@@ -29,13 +31,15 @@ public class BankersAlgorithm {
 		this.available=new ArrayList<Integer>(available);
 		this.algoType = algoType;
 		this.resSize = resSize;
-		availableProc=new ArrayList<Process>();
+		this.availableProc = new ArrayList<Process>();
+//		this.q = new LinkedList<Process>();
 		
-		chart.initAvailable(available);
-		Collections.sort(jobQ, Process.arrivalTimeComparator);
+		Collections.sort(jobQ, Process.arrivalTimeComparator);	
+	
 	}
 
 	public ArrayList<Process> getProcess(int t, int max) {
+
 		if (algoType.contains("TDTD")){
 			startTDTD(t, max);
 		}
@@ -44,6 +48,7 @@ public class BankersAlgorithm {
 			startTDDT(t, max);
 		}
 		
+//		return new ArrayList<Process>(q);
 		return availableProc;
 	}
 
@@ -51,7 +56,9 @@ public class BankersAlgorithm {
 		ArrayList<Integer> need;
 		int temp= (algoType.equalsIgnoreCase("reset"))? 0:curr;
 		int count=0;
-		
+	
+		Collections.sort(jobQ, Process.arrivalTimeComparator);	
+				
 		for (int k=1; temp<jobQ.size() && t>=jobQ.get(temp).getArrivalTime() && count<=max; 
 				k=1, temp++, count++){
 			
@@ -65,11 +72,13 @@ public class BankersAlgorithm {
 				jobQ.get(temp).setIsAllocated(choice, true);
 				allocateRes(jobQ.get(temp));
 				availableProc.add(jobQ.get(temp));
+				System.out.println("ADDED: "+jobQ.get(temp).getId());
 				curr=temp;
 				temp = algoType.equalsIgnoreCase("reset")? -1:temp;
 			}
 			if (temp==jobQ.size()-1) temp = -1;
 		}
+		
 	}
 	
 	public void startTDDT(int t, int max) {
@@ -77,6 +86,8 @@ public class BankersAlgorithm {
 		boolean down=true;
 		ArrayList<Integer> need;
 		int counter=0;
+		
+		Collections.sort(jobQ, Process.arrivalTimeComparator);	
 		
 		try{
 		for ( int k=1; temp<jobQ.size() && t>=jobQ.get(temp).getArrivalTime() && counter<=max; k=1, counter++){
@@ -109,12 +120,13 @@ public class BankersAlgorithm {
 	}
 	
 	public void resetAllocated(){
-		availableProc.removeAll(availableProc);
+		availableProc.clear();
 	}
 	
 	//release resources, a process is done
 	public void releaseRes(Process process){
 		//update available
+		
 		ArrayList<Integer> max;
 		max = process.getMax();
 		int temp;
@@ -132,10 +144,10 @@ public class BankersAlgorithm {
 	public void allocateRes(Process process){
 		//show max for need column
 		//show all 0 for need
-
+		
 		ArrayList<Integer> need;
-		int temp;
 		need = process.getNeed();
+		int temp;
 		
 		for (int j=1; j<resSize; j++){
 			temp= available.get(j);
@@ -148,12 +160,7 @@ public class BankersAlgorithm {
 	}
 	
 	public void setAvailable(ArrayList<Integer> available){
-		this.available = available;
-		System.out.println("AVAILABLE: ");
-		
-		for (int j=0; j<available.size(); j++){
-			System.out.println(available.get(j));
-		}
-		
+		this.available=new ArrayList<Integer>(available);
+		chart.initAvailable(available);
 	}
 }
