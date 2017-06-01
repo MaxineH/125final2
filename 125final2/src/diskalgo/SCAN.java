@@ -23,13 +23,6 @@ public class SCAN extends DiskAlgo {
 			list.put(i.getId(), new ArrayList<Integer>(i.getCylinder()));
 		}
 		p.addAll(new ArrayList<Process>(p));
-		
-		for (int i=0; i<list.size(); i++) {
-			if (list.containsKey(i)) {
-				list.get(i).add(0);
-				list.get(i).add(max);
-			}
-		}
 	}
 	
 	private int getNext(int index) {
@@ -42,20 +35,25 @@ public class SCAN extends DiskAlgo {
 		}
 		
 		int i=tmp.indexOf(head);
-		if (isRight && head!=max)
+		if ((isRight && head!=max) || (!isRight && head==tmp.get(0))) {
 			return tmp.get(i+1);
+		}
 		return tmp.get(i-1);
 	}
 	
 	public void execute(int t, int index) {
 		//index is process id
 		if (index!=-1) {
-			if (curr!=index && curr!=-1) {
-				p.put(curr, proctotal);
-				proctotal=0;
-				if (getDifference(head,0)>getDifference(head,max))
-					isRight=true;
-				else isRight=false;
+			if (curr!=index) {
+				if (curr!=-1) {
+					p.put(curr, proctotal);
+					proctotal=0;
+				}
+				if (getDifference(head,0)<getDifference(head,max))
+					isRight=false;
+				else isRight=true;
+				list.get(index).add(0,0);
+				list.get(index).add(max);
 			}
 			
 			int prev=head;
@@ -68,8 +66,19 @@ public class SCAN extends DiskAlgo {
 			list.get(index).remove(list.get(index).indexOf(head));
 			list.get(index).remove(list.get(index).indexOf(next));
 			chart.drawGraph(t,next);
+			
 			head=next;
 			curr=index;
+			
+			if (head==0 || head==max) {
+				next=getNext(index);
+				count=getDifference(head,next);
+				proctotal+=count;
+				total+=count;
+				chart.drawGraph(t, next);
+				list.get(index).remove(list.get(index).indexOf(next));
+				head=next;
+			}
 		}
 	}
 }
