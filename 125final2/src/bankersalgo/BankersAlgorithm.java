@@ -149,5 +149,11 @@ public class BankersAlgorithm {
 	
 	public void setAvailable(ArrayList<Integer> available){
 		this.available = available;
+		System.out.println("AVAILABLE: ");
+		
+		for (int j=0; j<available.size(); j++){
+			System.out.println(available.get(j));
+		}
+		
 	}
 }
