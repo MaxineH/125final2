@@ -74,6 +74,7 @@ public class CSCAN extends DiskAlgo {
 			if (curr!=index && curr!=-1) {
 				setDirection(index);
 				p.put(curr, proctotal);
+				proctotal=0;
 			}
 			
 			int prev=head;

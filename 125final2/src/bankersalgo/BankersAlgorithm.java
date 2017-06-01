@@ -20,8 +20,8 @@ public class BankersAlgorithm {
 	
 	private static int curr=0;
 	
-	public BankersAlgorithm(int choice, Chart chart, ArrayList<Process> jobQ, 
-			ArrayList<Integer> available, int resSize,String algoType ){
+	public BankersAlgorithm(int choice, Chart chart, ArrayList<Process> jobQ, ArrayList<Integer> available, int resSize,
+			String algoType ){
 
 		this.choice = choice;
 		this.chart = chart;

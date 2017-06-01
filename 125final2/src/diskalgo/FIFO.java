@@ -16,8 +16,10 @@ public class FIFO extends DiskAlgo {
 	public void execute(int t, int index) {
 		//index is process id
 		if (index>0 && list.get(index).size()>0) {
-			if (curr!=index && curr!=-1) {
+			if (curr!=-1 && curr!=index) {
+				System.out.println("here");
 				p.put(curr, proctotal);
+				proctotal=0;
 			}
 			
 			int prev=head;
@@ -30,6 +32,7 @@ public class FIFO extends DiskAlgo {
 			chart.drawGraph(t, next);
 			head=next;
 			list.get(index).remove(0);
+			curr=index;
 		}
 	}
 }

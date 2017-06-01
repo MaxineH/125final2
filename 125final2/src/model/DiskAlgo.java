@@ -38,7 +38,7 @@ public class DiskAlgo {
 	public ArrayList<Object> getProcessSummary() {
 		ArrayList<Object> obj=new ArrayList<Object>();
 		for (int i=0; i<=p.size(); i++) {
-			System.out.println("DISK ALGO="+p.get(i+1));
+			System.out.println("DISK ALGO="+p.get(i+1)+" "+i);
 			obj.add(p.get(i+1));
 		}
 		return obj;

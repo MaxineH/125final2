@@ -42,6 +42,7 @@ public class CLOOK extends DiskAlgo {
 		if (index!=-1) {
 			if (curr!=index && curr!=-1) {
 				p.put(curr,proctotal);
+				proctotal=0;
 			}
 			
 			int prev=head;

@@ -7,6 +7,10 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -111,13 +115,30 @@ public class UserPanel extends JPanel {
 		addButton = new JButton("Add");
 		addButton.setFont(f.deriveFont(20f));
 		addButton.setBackground(Color.WHITE);
-		addButton.setFocusable(false);
+		addButton.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+					addButton.doClick();
+				}
+			}
+		});
+		addButton.addFocusListener(new FocusAdapter() {
+			public void focusGained(FocusEvent e) {
+				pane.getVerticalScrollBar().setValue(pane.getVerticalScrollBar().getMaximum());
+			}
+		});
 		buttonPanel.add(addButton);
 	
 		resetButton = new JButton("Reset");
 		resetButton.setFont(f.deriveFont(20f));
 		resetButton.setBackground(Color.WHITE);
-		resetButton.setFocusable(false);
+		resetButton.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+					resetButton.doClick();
+				}
+			}
+		});
 		buttonPanel.add(resetButton);
 		
 		lastPanel.add(buttonPanel,BorderLayout.SOUTH);

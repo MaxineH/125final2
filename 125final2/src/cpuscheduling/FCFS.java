@@ -37,7 +37,7 @@ public class FCFS extends SchedulingAlgo{
 			
 			readyQSize = readyQ.size();
 			
-			if (curr<readyQSize){ 
+			if (curr<readyQSize && curr!=-1){ 
 				if (readyQ.get(curr).getResponseTime(choice)==-1){ 	//response time
 					responseTime = t-readyQ.get(curr).getReadyTime(choice);
 					readyQ.get(curr).setResponseTime(responseTime, choice);
@@ -47,21 +47,18 @@ public class FCFS extends SchedulingAlgo{
 				remTime = readyQ.get(curr).getRemainingTime(choice);
 				readyQ.get(curr).setRemainingTime(--remTime,choice);
 
+				chart.addBox(t,readyQ.get(curr).getColor());
+				setCurrProc(curr); //curr is process index in queue
+				
 				if (readyQ.get(curr).getRemainingTime(choice)==0){
 					readyQ.get(curr).setCompletionTime(t+1,choice);
 					setReleased(readyQ.get(curr));
-					chart.addBox(t+1, readyQ.get(curr).getColor(), true);
-					setCurrProc(curr);	//curr is process index in queue
 					curr++;
-				}
-				else {
-					chart.addBox(t, readyQ.get(curr).getColor(), false);
-					setCurrProc(curr);	//curr is process index in queue
 				}
 			}
 			
 			else{ //idle time
-				chart.addBox(t, Color.LIGHT_GRAY,true);
+				chart.addBox(t, Color.LIGHT_GRAY);
 				setCurrProc(-1);
 			}
 		}

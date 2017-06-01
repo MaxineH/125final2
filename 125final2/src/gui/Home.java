@@ -6,6 +6,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -14,11 +16,11 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.event.ChangeListener;
 
-import utils.CustomTab;
-import utils.Utils;
 import controller.ActionController;
 import controller.ChangeController;
 import controller.ItemController;
+import utils.CustomTab;
+import utils.Utils;
 
 @SuppressWarnings("serial")
 public class Home extends JPanel {
@@ -55,7 +57,13 @@ public class Home extends JPanel {
 		button.setForeground(Color.WHITE);
 		button.setFont(Utils.getFont("res\\STREET.ttf", 15f));
 		button.setBackground(new Color(33,38,43));
-		button.setFocusable(false);
+		button.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+					button.doClick();
+				}
+			}
+		});
 		
 		preset=new Preset();
 		menuPanel=new MenuPanel(preset);

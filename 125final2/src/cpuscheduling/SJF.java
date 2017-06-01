@@ -54,10 +54,7 @@ public class SJF extends SchedulingAlgo{
 				readyQ.get(curr).setWaitingTime(responseTime, choice);
 			}
 		
-			if (currProc!=curr)
-				chart.addBox(t,readyQ.get(curr).getColor(),true);
-			else
-				chart.addBox(t,readyQ.get(curr).getColor(),false);
+			chart.addBox(t,readyQ.get(curr).getColor());
 			setCurrProc(curr);
 			
 			remTime = readyQ.get(curr).getRemainingTime(choice);
@@ -72,7 +69,7 @@ public class SJF extends SchedulingAlgo{
 		}
 		
 		else{ //idle time
-			chart.addBox(t,Color.LIGHT_GRAY,true);
+			chart.addBox(t,Color.LIGHT_GRAY);
 			curr=-1;
 			setCurrProc(-1);
 		}

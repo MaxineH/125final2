@@ -7,6 +7,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -132,14 +134,26 @@ public class ListPanel extends JPanel {
 		startButton.setFont(f.deriveFont(18f));
 		startButton.setBackground(new Color(38,45,52));
 		startButton.setForeground(Color.WHITE);
-		startButton.setFocusable(false);
+		startButton.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+					startButton.doClick();
+				}
+			}
+		});
 		button.add(startButton);
 		
 		resetButton = new JButton("Reset");
 		resetButton.setFont(f.deriveFont(18f));
 		resetButton.setBackground(new Color(38,45,52));
 		resetButton.setForeground(Color.WHITE);
-		resetButton.setFocusable(false);
+		resetButton.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER) {
+					resetButton.doClick();
+				}
+			}
+		});
 		button.add(resetButton);
 		add(Box.createRigidArea(new Dimension(10,20)));
 		add(button);

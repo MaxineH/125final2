@@ -36,6 +36,7 @@ public class LOOK extends DiskAlgo {
 		if (index!=-1) {
 			if (curr!=index && curr!=-1) {
 				p.put(curr,proctotal);
+				proctotal=0;
 				if (getDifference(head,0)>getDifference(head,max))
 					isRight=true;
 				else isRight=false;

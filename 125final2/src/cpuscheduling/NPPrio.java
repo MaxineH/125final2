@@ -47,9 +47,9 @@ public class NPPrio extends SchedulingAlgo{
 			}
 		
 			if (currProc!=curr)
-				chart.addBox(t, readyQ.get(curr).getColor(),true);
+				chart.addBox(t, readyQ.get(curr).getColor());
 			else
-				chart.addBox(t, readyQ.get(curr).getColor(),false);
+				chart.addBox(t, readyQ.get(curr).getColor());
 			setCurrProc(curr);
 			
 			remTime = readyQ.get(curr).getRemainingTime(choice);
@@ -62,7 +62,7 @@ public class NPPrio extends SchedulingAlgo{
 				counter++;
 			}
 		}else{ //idle time
-			chart.addBox(t,Color.LIGHT_GRAY,true);
+			chart.addBox(t,Color.LIGHT_GRAY);
 			curr=-1;
 			setCurrProc(-1);
 		}

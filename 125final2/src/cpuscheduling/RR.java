@@ -52,7 +52,7 @@ public class RR extends SchedulingAlgo{
 			curr=getProcess();
 		
 			if (curr==-1){
-				chart.addBox(t, Color.LIGHT_GRAY,true); //addBox(Color.WHITE);
+				chart.addBox(t, Color.LIGHT_GRAY); //addBox(Color.WHITE);
 				setCurrProc(-1);
 			}
 		}
@@ -78,10 +78,7 @@ public class RR extends SchedulingAlgo{
 				prev = readyQ.get(curr).getId();		
 			}
 			
-			if (currProc!=curr)
-				chart.addBox(t, readyQ.get(curr).getColor(), true);
-			else
-				chart.addBox(t, readyQ.get(curr).getColor(),false);
+			chart.addBox(t, readyQ.get(curr).getColor());
 			setCurrProc(curr);
 			q++;
 			

@@ -3,6 +3,7 @@ package model;
 import gui.Chart;
 import gui.SimulationPanel;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 import utils.Utils;
@@ -28,6 +29,7 @@ public class Simulation extends Thread {
 	public Simulation(Input input,SimulationPanel simPanel, boolean state) {
 		this.simPanel=simPanel;
 		pauseThreadFlag=state;
+		System.out.println(pauseThreadFlag);
 		simCount=input.getSize();
 		cpu=new SchedulingAlgo[simCount];
 		banker=new BankersAlgorithm[simCount];
@@ -110,9 +112,11 @@ public class Simulation extends Thread {
 					
 					if (done==simCount) {
 						running=false;
+						chart[i].addBox(t, Color.WHITE);
 						chart[i].showStat(Utils.mergeList(cpu[i].getProcessSummary(i),
 								disk[i].getProcessSummary()),"<html>"+cpu[i].getSummary()+
-								disk[i].getTotal()+"</html>"); 
+								disk[i].getTotal()+"</html>");
+						chart[i].repaint();
 						break;
 					}
 					banker[i].resetAllocated();
@@ -123,9 +127,9 @@ public class Simulation extends Thread {
 			
 			try {
 				Thread.sleep(delay);
-				while (!pauseThreadFlag) {
-					interrupt();
-				}
+//				while (pauseThreadFlag) {
+//					interrupt();
+//				}
 			} catch(Exception e) {}
 		}
 	}

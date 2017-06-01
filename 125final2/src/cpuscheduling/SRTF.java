@@ -68,10 +68,7 @@ public class SRTF extends SchedulingAlgo{
 				prev = readyQ.get(curr).getId();		
 			}
 			
-			if (currProc!=curr)
-				chart.addBox(t,readyQ.get(curr).getColor(),true);
-			else
-				chart.addBox(t,readyQ.get(curr).getColor(),false);
+			chart.addBox(t,readyQ.get(curr).getColor());
 			setCurrProc(curr);
 			
 			remTime = readyQ.get(curr).getRemainingTime(choice);
@@ -83,7 +80,7 @@ public class SRTF extends SchedulingAlgo{
 				counter++;
 			}
 		} else{ //idle time
-			chart.addBox(t,Color.LIGHT_GRAY,true);
+			chart.addBox(t,Color.LIGHT_GRAY);
 			setCurrProc(-1);
 		}
 		if (counter==size)	done=true;

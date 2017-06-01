@@ -24,8 +24,10 @@ import utils.Utils;
 @SuppressWarnings("serial")
 public class Chart extends JPanel {
 	
-	private JPanel avail,queue,center,innerPanel;
+	private JPanel avail,queue,center,innerPanel, outerPanel;
+	private JScrollPane pane;
 	private DiskPanel bottom;
+	private StatPanel statPanel;
 	private JLabel[] label;
 	
 	private Font f;
@@ -33,27 +35,39 @@ public class Chart extends JPanel {
 	
 	public Chart(int id,int head,int max,int time) {
 		f=Utils.getFont("res\\STREET.ttf",18f);
-		innerPanel=new JPanel();
 		
 		Border b=BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(5,5,5,5),
 				"Simulation "+id,TitledBorder.CENTER,TitledBorder.TOP,
 				f.deriveFont(30f).deriveFont(Font.BOLD),Color.BLACK);
+		
+		outerPanel=new JPanel();
+		outerPanel.setBackground(Color.WHITE);
+		outerPanel.setLayout(new BorderLayout());
+		outerPanel.setOpaque(false);
+		outerPanel.setPreferredSize(new Dimension(450,1000));
+		
+		
+		innerPanel=new JPanel();
 		innerPanel.setLayout(new BoxLayout(innerPanel,BoxLayout.Y_AXIS));
-		innerPanel.setPreferredSize(new Dimension(450,600));
 		innerPanel.setBackground(Color.WHITE);
-		innerPanel.setBorder(b);
 		initTop();
 		initCenter();
 		bottom=new DiskPanel(max,head,time);
 		innerPanel.add(bottom);
 		
-		setLayout(new BorderLayout());
-		JScrollPane pane=new JScrollPane(innerPanel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+		statPanel=new StatPanel();
+		
+		setBorder(b);
+		setBackground(Color.WHITE);
+		setLayout(new GridLayout());
+		pane=new JScrollPane(outerPanel,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		pane.setBorder(null);
+		pane.setBorder(BorderFactory.createEmptyBorder());
 		pane.setOpaque(false);
 		pane.getViewport().setOpaque(false);
-		add(pane,BorderLayout.CENTER);
+		outerPanel.add(statPanel,BorderLayout.SOUTH);
+		outerPanel.add(innerPanel,BorderLayout.CENTER);
+		add(pane);
 	}
 	
 	private void initTop() {
@@ -63,6 +77,8 @@ public class Chart extends JPanel {
 				TitledBorder.CENTER,TitledBorder.TOP,f,Color.BLACK),
 				BorderFactory.createEmptyBorder(5,5,5,5)));
 		avail.setOpaque(false);
+		avail.setMinimumSize(new Dimension(450,50));
+		avail.setMaximumSize(new Dimension(450,50));
 		avail.setLayout(new FlowLayout(FlowLayout.CENTER,10,0));
 		innerPanel.add(avail);
 		innerPanel.add(Box.createRigidArea(new Dimension(5,5)));
@@ -73,6 +89,7 @@ public class Chart extends JPanel {
 				TitledBorder.CENTER,TitledBorder.TOP,f,Color.BLACK),
 				BorderFactory.createEmptyBorder(5,5,5,5)));
 		queue.setMaximumSize(new Dimension(900,50));
+		queue.setMinimumSize(new Dimension(450,50));
 		queue.setLayout(new GridLayout(1,15,0,0));
 		queue.setOpaque(false);
 		innerPanel.add(queue);
@@ -122,8 +139,8 @@ public class Chart extends JPanel {
 		revalidate();
 	}
 
-	public void addBox(int t, Color color, boolean hasLabel) {
-		if (hasLabel)
+	public void addBox(int t, Color color) {
+		if (prevColor!=color)
 			center.add(new CustomField(color,prevColor,Integer.toString(t)));
 		else
 			center.add(new CustomField(color,prevColor,""));
@@ -139,6 +156,9 @@ public class Chart extends JPanel {
 	}
 
 	public void showStat(ArrayList<Object[]> obj,String str) {
-		innerPanel.add(new StatPanel(obj,str));
+		statPanel.init(obj, str);
+		pane.getVerticalScrollBar().setValue(pane.getVerticalScrollBar().getMaximum());
+		repaint();
+		revalidate();
 	}
 }

@@ -93,7 +93,6 @@ public class RandPanel extends JPanel {
 			String tmp=m.replace(header, "");
 			tmp=tmp.substring(0, tmp.indexOf(","));
 			
-			time=Integer.parseInt(tmp);
 			String c=header+getVector(max,Integer.parseInt(tmp))+end;
 			
 			if (resourceNum==1) {
