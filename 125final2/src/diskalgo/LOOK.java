@@ -9,7 +9,6 @@ import model.DiskAlgo;
 public class LOOK extends DiskAlgo {
 
 	private Chart chart;
-	private int curr=-1;
 	private boolean isRight=false;
 	
 	public LOOK(int head,int max,Chart chart) {

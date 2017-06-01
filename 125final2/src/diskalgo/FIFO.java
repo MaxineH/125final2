@@ -6,7 +6,6 @@ import model.DiskAlgo;
 public class FIFO extends DiskAlgo {
 
 	private Chart chart;
-	private int curr=-1;
 	
 	public FIFO(int head,int max,Chart chart) {
 		super(max,head);

@@ -10,6 +10,7 @@ public class DiskAlgo {
 	protected HashMap<Integer,Integer> p=new HashMap<Integer,Integer>();
 	protected HashMap<Integer,ArrayList<Integer>> list=new HashMap<Integer,ArrayList<Integer>>();
 	protected int total=0;
+	protected int curr=-1;
 	protected int proctotal=0;
 	protected int max,head;
 	
@@ -30,6 +31,10 @@ public class DiskAlgo {
 	}
 	
 	public void execute(int t, int index) {}
+	
+	public void fin() {
+		p.put(curr, proctotal);
+	}
 	
 	public String getTotal() {
 		return "Total Cylinders: "+total;

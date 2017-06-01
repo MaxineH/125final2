@@ -90,7 +90,7 @@ public class Simulation extends Thread {
 		int done=0;
 
 		while (running) {
-			if (!this.isInterrupted() && !pauseThreadFlag) {
+			if (!pauseThreadFlag) {
 				for (int i=0; i<simCount; i++) {
 					tempProc = banker[i].getProcess(t, maxIteration);
 					
@@ -107,6 +107,7 @@ public class Simulation extends Thread {
 					}
 					if  (cpu[i].isDone()) {
 						cpu[i].set();
+						disk[i].fin();
 						done++;
 					}
 					

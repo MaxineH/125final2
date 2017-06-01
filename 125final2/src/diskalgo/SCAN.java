@@ -11,7 +11,6 @@ import model.Process;
 public class SCAN extends DiskAlgo {
 
 	private Chart chart;
-	private int curr=-1;
 	private boolean isRight=false;
 	
 	public SCAN(int head,int max,Chart chart) {

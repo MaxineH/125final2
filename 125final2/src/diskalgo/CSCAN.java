@@ -10,7 +10,6 @@ import model.Process;
 public class CSCAN extends DiskAlgo {
 
 	private Chart chart;
-	private int curr=-1;
 	private boolean isRight=false;
 	
 	public CSCAN(int head,int max,Chart chart) {

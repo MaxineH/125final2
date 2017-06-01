@@ -10,7 +10,6 @@ import model.DiskAlgo;
 public class SSTF extends DiskAlgo {
 
 	private Chart chart;
-	private int curr=-1;
 	
 	public SSTF(int head,int max,Chart chart) {
 		super(max,head);
