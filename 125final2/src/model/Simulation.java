@@ -25,11 +25,12 @@ public class Simulation extends Thread {
 	private BankersAlgorithm[] banker;
 	private DiskAlgo[] disk;
 	private Chart[] chart;
+	private boolean pause;
 	
 	public Simulation(Input input,SimulationPanel simPanel, boolean state) {
 		this.simPanel=simPanel;
 		pauseThreadFlag=state;
-		System.out.println(pauseThreadFlag);
+		pause = state;
 		simCount=input.getSize();
 		cpu=new SchedulingAlgo[simCount];
 		banker=new BankersAlgorithm[simCount];
@@ -71,7 +72,6 @@ public class Simulation extends Thread {
 	
 	public void pause() {
 		if (!pauseThreadFlag) {
-			this.interrupt();
 			pauseThreadFlag=true;
 		}
 		else {
@@ -92,6 +92,7 @@ public class Simulation extends Thread {
 		while (running) {
 			if (!pauseThreadFlag) {
 				for (int i=0; i<simCount; i++) {
+					
 					tempProc = banker[i].getProcess(t, maxIteration);
 					
 					if (tempProc.size()>0) {
@@ -123,14 +124,10 @@ public class Simulation extends Thread {
 					banker[i].resetAllocated();
 				}
 				t++;
-				simPanel.changeName();
 			}
 			
 			try {
 				Thread.sleep(delay);
-//				while (pauseThreadFlag) {
-//					interrupt();
-//				}
 			} catch(Exception e) {}
 		}
 	}
