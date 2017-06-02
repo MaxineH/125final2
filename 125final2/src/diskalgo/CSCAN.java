@@ -5,7 +5,6 @@ import java.util.Collections;
 
 import gui.Chart;
 import model.DiskAlgo;
-import model.Process;
 
 public class CSCAN extends DiskAlgo {
 
@@ -19,8 +18,10 @@ public class CSCAN extends DiskAlgo {
 
 	private int getNext(int index) {
 		ArrayList<Integer> tmp=list.get(index);
-		if ((curr==-1 || curr!=index) && tmp.indexOf(head)!=-1)
+		if ((curr==-1 || curr!=index) && tmp.indexOf(head)!=-1) {
+			tmp.add(head);
 			return head;
+		}
 		else {
 			tmp.add(head);
 			Collections.sort(tmp);
@@ -31,35 +32,15 @@ public class CSCAN extends DiskAlgo {
 			return tmp.get(i+1);
 		return tmp.get(i-1);
 	}
-//	
-//	private void setDirection(int index) {
-//		ArrayList<Integer> tmp=list.get(index);
-//		if ((curr==-1 || curr!=index) && tmp.indexOf(head)==-1) {
-//			tmp.add(head);
-//			Collections.sort(tmp);
-//		}
-//		
-//		int i=tmp.indexOf(head);
-//		int right,left;
-//		
-//		if (i!=0) left=tmp.get(i-1);
-//		else left=tmp.get(tmp.size()-1);
-//		
-//		if (i!=tmp.size()-1) right=tmp.get(i+1);
-//		else right=tmp.get(0);
-//		
-//		tmp.remove(i);
-//		if (getDifference(head,left)>getDifference(right,head))
-//			isRight=false;
-//		isRight=true;
-//	}
 	
 	public void execute(int t, int index) {
 		//index is process id
 		if (index!=-1) {
-			if (curr!=index && curr!=-1) {
-				p.put(curr, proctotal);
-				proctotal=0;
+			if (curr!=index) {
+				if (curr!=-1) {
+					p.put(curr, proctotal);
+					proctotal=0;
+				}
 				if (getDifference(head,0)<getDifference(head,max))
 					isRight=false;
 				else isRight=true;
@@ -77,21 +58,25 @@ public class CSCAN extends DiskAlgo {
 			list.get(index).remove(list.get(index).indexOf(head));
 			list.get(index).remove(list.get(index).indexOf(next));
 			
-			if (next==0) {
+			if (next==0 || next==max) {
 				chart.drawGraph(t-0.5, next);
-				next=max;
+				head=next;
+				if (head==0) next=max;
+				else next=0;
 				chart.drawGraph(t-0.5, next);
-				list.get(index).remove(list.get(index).indexOf(max));
-			}
-			else if (next==max) {
-				chart.drawGraph(t-0.5, next);
-				next=0;
-				chart.drawGraph(t-0.5, next);
-				list.get(index).remove(list.get(index).indexOf(0));
+				list.get(index).remove(list.get(index).indexOf(next));
+				head=next;
+				next=getNext(index);
+				count=getDifference(head,next);
+				proctotal+=count;
+				total+=count;
+				chart.drawGraph(t,next);
+				list.get(index).remove(list.get(index).indexOf(next));
 			}
 			else {
-				chart.drawGraph(t,next);
+				chart.drawGraph(t, next);
 			}
+
 			head=next;
 			curr=index;
 		}
