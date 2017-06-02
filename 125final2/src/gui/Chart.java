@@ -34,7 +34,7 @@ public class Chart extends JPanel {
 	private Color prevColor=Color.WHITE, rColor=Color.WHITE;
 	
 	public Chart(int id,int head,int max,int time) {
-		f=Utils.getFont("res\\STREET.ttf",18f);
+		f=Utils.getFont("/STREET.ttf",18f);
 		
 		Border b=BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(5,5,5,5),
 				"Simulation "+id,TitledBorder.CENTER,TitledBorder.TOP,

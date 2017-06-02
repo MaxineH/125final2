@@ -35,7 +35,7 @@ public class Preset extends JPanel {
 					   "head cylinder:"};
 		SpinnerNumberModel[] m= {new SpinnerNumberModel(1,1,10,1), new SpinnerNumberModel(1,1,null,1),
 						new SpinnerNumberModel(0,0,1,1)};
-		Font f= Utils.getFont("res\\STREET.ttf",15f);
+		Font f= Utils.getFont("/STREET.ttf",15f);
 		
 		for(int i=0; i<3; i++) {
 			label[i]= new JLabel(str[i]);

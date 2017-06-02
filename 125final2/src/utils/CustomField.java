@@ -24,7 +24,7 @@ public class CustomField extends JTextField {
 		this.color=color;
 		this.prev=prev;
 		Border b=BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(5,5,5,5),
-				s,TitledBorder.LEFT,TitledBorder.BELOW_BOTTOM,Utils.getFont("res\\STREET.ttf", 15f),Color.BLACK);
+				s,TitledBorder.LEFT,TitledBorder.BELOW_BOTTOM,Utils.getFont("/STREET.ttf", 15f),Color.BLACK);
 		setBorder(BorderFactory.createCompoundBorder(new BorderLine(),b));
 		setEditable(false);
 		setOpaque(false);

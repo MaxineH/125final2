@@ -2,8 +2,6 @@ package bankersalgo;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
-import java.util.Queue;
 
 import gui.Chart;
 import model.Process;
@@ -72,7 +70,6 @@ public class BankersAlgorithm {
 				jobQ.get(temp).setIsAllocated(choice, true);
 				allocateRes(jobQ.get(temp));
 				availableProc.add(jobQ.get(temp));
-				System.out.println("ADDED: "+jobQ.get(temp).getId());
 				curr=temp;
 				temp = algoType.equalsIgnoreCase("reset")? -1:temp;
 			}

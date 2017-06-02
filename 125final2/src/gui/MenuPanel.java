@@ -29,7 +29,7 @@ public class MenuPanel extends JPanel {
 	public MenuPanel(Preset preset) {
 		this.preset=preset;
 		String[] modes={"Single","Comparative"};
-		Font f=Utils.getFont("res\\STREET.ttf",15f);
+		Font f=Utils.getFont("/STREET.ttf",15f);
 	
 		mode=new JComboBox<String>(modes);
 		mode.setBackground(Color.WHITE);

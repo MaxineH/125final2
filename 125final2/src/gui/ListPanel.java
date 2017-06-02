@@ -51,7 +51,7 @@ public class ListPanel extends JPanel {
 	}
 	
 	private void init() {
-		Font f = Utils.getFont("res\\STREET.ttf",15f);
+		Font f = Utils.getFont("/STREET.ttf",15f);
 		String[] colNames = {"","<html><div style='text-align: center;'>Proc<br>No</div></html>",
 							 "<html><div style='text-align: center;'>Arrival<br>Time</div></html>",
 							 "<html><div style='text-align: center;'>Max<br>Vector</div></html>",

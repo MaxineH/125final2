@@ -20,7 +20,7 @@ public class RandPanel extends JPanel {
 	
 	public RandPanel() {
 		JLabel label=new JLabel("Generating random list of processes");
-		label.setFont(Utils.getFont("res\\STREET.ttf", 18f));
+		label.setFont(Utils.getFont("/STREET.ttf", 18f));
 		setLayout(new GridBagLayout());
 		setBackground(Color.WHITE);
 		setMinimumSize(new Dimension(310,200));

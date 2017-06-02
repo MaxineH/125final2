@@ -55,7 +55,7 @@ public class Home extends JPanel {
 		
 		button=new JButton("<html><U>OK</U></html>");
 		button.setForeground(Color.WHITE);
-		button.setFont(Utils.getFont("res\\STREET.ttf", 15f));
+		button.setFont(Utils.getFont("/STREET.ttf", 15f));
 		button.setBackground(new Color(33,38,43));
 		button.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent e) {

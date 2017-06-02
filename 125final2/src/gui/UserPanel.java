@@ -45,7 +45,7 @@ public class UserPanel extends JPanel {
 	private int count=1;
 	
 	public UserPanel() {
-		Font f=Utils.getFont("res\\STREET.ttf",20f);
+		Font f=Utils.getFont("/STREET.ttf",20f);
 		border=BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(5,5,5,5),
 				"PROCESS 1",TitledBorder.CENTER,TitledBorder.TOP,
 				f.deriveFont(Font.BOLD),Color.BLACK);

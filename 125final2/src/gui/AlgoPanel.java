@@ -31,7 +31,7 @@ public class AlgoPanel extends JPanel {
 	private Algo algo;
 	
 	public AlgoPanel(int id) {
-		Font font=Utils.getFont("res\\STREET.ttf", 15f);
+		Font font=Utils.getFont("/STREET.ttf", 15f);
 		Border border=BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(),
 						"Simulation "+id,TitledBorder.CENTER,TitledBorder.TOP,
 						font.deriveFont(Font.BOLD),Color.BLACK);

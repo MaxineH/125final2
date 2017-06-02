@@ -27,7 +27,7 @@ public class SpinnerPanel extends JPanel {
 	private int size=0;
 	
 	public SpinnerPanel(String title, Color color, int x, int y) {
-		Font f= Utils.getFont("res\\STREET.ttf", 15f);
+		Font f= Utils.getFont("/STREET.ttf", 15f);
 		Border b = BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(5,5,5,5),title,
 				   TitledBorder.CENTER,TitledBorder.TOP,f.deriveFont(Font.BOLD),color);
 		setBorder(new CompoundBorder(b,BorderFactory.createEmptyBorder(5,5,5,5)));
@@ -37,7 +37,7 @@ public class SpinnerPanel extends JPanel {
 	}
 	
 	public SpinnerPanel(String title, Color color) {
-		Font f= Utils.getFont("res\\STREET.ttf", 15f);
+		Font f= Utils.getFont("/STREET.ttf", 15f);
 		Border b = BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(5,5,5,5),title,
 				   TitledBorder.CENTER,TitledBorder.TOP,f.deriveFont(Font.BOLD),color);
 		setBorder(new CompoundBorder(b,BorderFactory.createEmptyBorder(5,5,5,5)));
@@ -48,7 +48,7 @@ public class SpinnerPanel extends JPanel {
 	public void setSpinner(int n, int min, int max) {
 		size=n;
 		int i= spinner.size();
-		Font f= Utils.getFont("res\\STREET.ttf", 16f);
+		Font f= Utils.getFont("/STREET.ttf", 16f);
 		
 		if (n>14)
 			setLayout(new GridLayout(0,5,5,5));

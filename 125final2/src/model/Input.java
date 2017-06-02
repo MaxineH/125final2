@@ -125,7 +125,6 @@ public class Input {
 	}
 	
 	public BankersAlgorithm getBankers(int index,Chart chart) {
-		System.out.println("BANKERS: " +algo[index].getBankers());
 		return new BankersAlgorithm(index,chart,p,available,resourceNum
 				,algo[index].getBankers());
 		

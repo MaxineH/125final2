@@ -24,7 +24,7 @@ public class CustomTab extends JTabbedPane {
 	}
 	
 	private class CustomUI extends MetalTabbedPaneUI {
-		private Font f = Utils.getFont("res\\titlefont.ttf", 17f);
+		private Font f = Utils.getFont("/titlefont.ttf", 17f);
 		private Color selectedColor = new Color(250,107,91);
 		private Color bg = new Color(40,49,57);
 		

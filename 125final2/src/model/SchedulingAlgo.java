@@ -114,7 +114,6 @@ public class SchedulingAlgo {
 			Object[] tmp={readyQ.get(i).getId(),readyQ.get(i).getResponseTime(choice),
 					readyQ.get(i).getWaitingTime(choice),
 					readyQ.get(i).getTurnaroundTime(choice)};
-			System.out.println("SCHED ALGO="+readyQ.get(i).getId()+" "+tmp.length);
 			obj.add(tmp);
 		}
 		return obj;

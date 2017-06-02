@@ -27,7 +27,7 @@ public class StatPanel extends JPanel {
 	private Font font;
 	
 	public StatPanel() {
-		font=Utils.getFont("res\\STREET.ttf",25f);
+		font=Utils.getFont("/STREET.ttf",25f);
 
 		setPreferredSize(new Dimension(450,400));
 		setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));

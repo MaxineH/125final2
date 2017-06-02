@@ -23,7 +23,7 @@ public class SimulationPanel extends JPanel {
 	private Font f;
 	
 	public SimulationPanel() {
-		f=Utils.getFont("res\\STREET.ttf", 20f).deriveFont(Font.BOLD);
+		f=Utils.getFont("/STREET.ttf", 20f).deriveFont(Font.BOLD);
 		setLayout(new BorderLayout());
 		setOpaque(false);
 		initTop();

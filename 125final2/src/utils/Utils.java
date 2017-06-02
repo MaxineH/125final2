@@ -5,8 +5,12 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 
+import main.Main;
 import model.Process;
 
 public class Utils {
@@ -27,7 +31,9 @@ public class Utils {
 	public static Font getFont(String path,float size) {
 		Font f = null;
 		try {
-			f = Font.createFont(Font.TRUETYPE_FONT, new File(path));
+			InputStream is =  Utils.class.getResourceAsStream(path);
+			f = Font.createFont(Font.TRUETYPE_FONT, is);
+		
 		} catch(FontFormatException e) {
 			e.printStackTrace();
 		} catch(IOException e) {
@@ -66,7 +72,6 @@ public class Utils {
 	public static ArrayList<Object[]> mergeList(ArrayList<Object[]> cpu, ArrayList<Object> disk) {
 		ArrayList<Object[]> obj=new ArrayList<Object[]>();
 		for (int i=0; i<cpu.size(); i++) {
-			System.out.println(disk.get(i));
 			Object[] tmp={cpu.get(i)[0],cpu.get(i)[1],cpu.get(i)[2],cpu.get(i)[3],disk.get(i)};
 			obj.add(tmp);
 		}

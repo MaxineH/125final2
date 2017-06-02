@@ -1,22 +1,24 @@
 package main;
 
-import gui.Home;
-
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+
+import gui.Home;
 
 public class Main {
 
 	public static void main(String[] args) {
 		BufferedImage icon=null;
 		
-		try {
-			icon=ImageIO.read(new File("res/eshilogo.png"));
+		try {	
+			URL url = Main.class.getResource("/eshilogo.png");
+			icon=ImageIO.read(url);
 		} catch(IOException e) {
 			e.printStackTrace();
 		}

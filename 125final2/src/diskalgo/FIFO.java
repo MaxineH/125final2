@@ -16,7 +16,6 @@ public class FIFO extends DiskAlgo {
 		//index is process id
 		if (index>0 && list.get(index).size()>0) {
 			if (curr!=-1 && curr!=index) {
-				System.out.println("here");
 				p.put(curr, proctotal);
 				proctotal=0;
 			}
