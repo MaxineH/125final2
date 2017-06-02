@@ -18,16 +18,19 @@ public class LOOK extends DiskAlgo {
 	
 	private int getNext(int index) {
 		ArrayList<Integer> tmp=list.get(index);
-		if ((curr==-1 || curr!=index) && tmp.indexOf(head)!=-1)
+		if ((curr==-1 || curr!=index) && tmp.indexOf(head)!=-1) {
+			tmp.add(head);
 			return head;
+		}
 		else {
 			tmp.add(head);
 			Collections.sort(tmp);
 		}
 		
 		int i=tmp.indexOf(head);
-		if (isRight && head!=max)
+		if ((isRight && head!=tmp.get(tmp.size()-1)) || (!isRight && head==tmp.get(0))) {
 			return tmp.get(i+1);
+		}
 		return tmp.get(i-1);
 	}
 	
@@ -36,9 +39,9 @@ public class LOOK extends DiskAlgo {
 			if (curr!=index && curr!=-1) {
 				p.put(curr,proctotal);
 				proctotal=0;
-				if (getDifference(head,0)>getDifference(head,max))
-					isRight=true;
-				else isRight=false;
+				if (getDifference(head,0)<getDifference(head,max))
+					isRight=false;
+				else isRight=true;
 			}
 			
 			int prev=head;

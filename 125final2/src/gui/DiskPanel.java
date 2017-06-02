@@ -55,12 +55,12 @@ public class DiskPanel extends JPanel {
 		return dataset;
 	}
 	
-	public void updateChart(int i,int x) {
+	public void updateChart(double d,int x) {
 		if (x>time) {
 			XYPlot plot=chart.getXYPlot();
 			NumberAxis domain=(NumberAxis)plot.getDomainAxis();
 			domain.setAutoRange(true);
 		}
-		series.add(i,x);
+		series.add(d,x);
 	}
 }

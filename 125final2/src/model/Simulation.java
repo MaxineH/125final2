@@ -107,11 +107,14 @@ public class Simulation extends Thread {
 					}
 					
 					cpu[i].execute(t);
-					disk[i].execute(t+1, cpu[i].getCurrProc());
+					if (!cpu[i].isDone()) {
+						disk[i].execute(t+1, cpu[i].getCurrProc());
+					}
 					
 					if (cpu[i].hasReleased()) {
 						banker[i].releaseRes(cpu[i].getReleased());
 					}
+					
 					if  (cpu[i].isDone()) {
 						cpu[i].set();
 						disk[i].fin();

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import model.DiskAlgo;
-import model.Process;
 
 public class SCAN extends DiskAlgo {
 
@@ -18,17 +17,12 @@ public class SCAN extends DiskAlgo {
 		this.chart=chart;
 	}
 	
-	public void addList(ArrayList<Process> p) {
-		for (Process i: p) {
-			list.put(i.getId(), new ArrayList<Integer>(i.getCylinder()));
-		}
-		p.addAll(new ArrayList<Process>(p));
-	}
-	
 	private int getNext(int index) {
 		ArrayList<Integer> tmp=list.get(index);
-		if ((curr==-1 || curr!=index) && tmp.indexOf(head)!=-1)
+		if ((curr==-1 || curr!=index) && tmp.indexOf(head)!=-1) {
+			tmp.add(head);
 			return head;
+		}
 		else {
 			tmp.add(head);
 			Collections.sort(tmp);
@@ -65,20 +59,24 @@ public class SCAN extends DiskAlgo {
 			
 			list.get(index).remove(list.get(index).indexOf(head));
 			list.get(index).remove(list.get(index).indexOf(next));
-			chart.drawGraph(t,next);
 			
-			head=next;
-			curr=index;
-			
-			if (head==0 || head==max) {
+			if (next==0 || next==max) {
+				chart.drawGraph(t-0.5,next);
+				head=next;
 				next=getNext(index);
 				count=getDifference(head,next);
 				proctotal+=count;
 				total+=count;
 				chart.drawGraph(t, next);
+				list.get(index).remove(list.get(index).indexOf(head));
 				list.get(index).remove(list.get(index).indexOf(next));
-				head=next;
 			}
+			else {
+				chart.drawGraph(t,next);
+			}
+			
+			head=next;
+			curr=index;
 		}
 	}
 }

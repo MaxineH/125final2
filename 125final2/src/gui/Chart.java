@@ -151,8 +151,8 @@ public class Chart extends JPanel {
 		revalidate();
 	}
 
-	public void drawGraph(int n, int t) {
-		bottom.updateChart(n, t);
+	public void drawGraph(double d, int n) {
+		bottom.updateChart(d, n);
 	}
 
 	public void showStat(ArrayList<Object[]> obj,String str) {
